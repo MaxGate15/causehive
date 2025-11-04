@@ -1,3 +1,5 @@
+import React from 'react'
+
 // User Types
 export interface User {
   id: string
@@ -251,13 +253,12 @@ export interface ButtonProps extends BaseComponentProps {
   type?: 'button' | 'submit' | 'reset'
 }
 
-export interface InputProps extends BaseComponentProps {
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
-  placeholder?: string
-  value?: string
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value' | 'className'> {
+  id?: string
   onChange?: (value: string) => void
+  value?: string
   error?: string
-  disabled?: boolean
+  className?: string
   required?: boolean
 }
 
