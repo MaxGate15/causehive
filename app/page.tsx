@@ -31,11 +31,20 @@ const mockCauses: Cause[] = [
       email: 'organizer@example.com',
       first_name: 'John',
       last_name: 'Doe',
+      location: 'Accra, Ghana',
+      phone: '+233123456789',
+      occupation: 'Teacher',
       is_verified: true,
       is_active: true,
       date_joined: '2024-01-01',
       last_login: '2024-01-15',
-      role: 'organizer'
+      role: 'organizer',
+      profile_visibility: {
+        show_full_name: true,
+        show_location: true,
+        show_phone: false,
+        show_occupation: true
+      }
     },
     created_at: '2024-01-01',
     updated_at: '2024-01-15',
@@ -62,11 +71,20 @@ const mockCauses: Cause[] = [
       email: 'relief@example.com',
       first_name: 'Jane',
       last_name: 'Smith',
+      location: 'Lagos, Nigeria',
+      phone: '+234123456789',
+      occupation: 'NGO Worker',
       is_verified: true,
       is_active: true,
       date_joined: '2024-01-01',
       last_login: '2024-01-15',
-      role: 'organizer'
+      role: 'organizer',
+      profile_visibility: {
+        show_full_name: true,
+        show_location: true,
+        show_phone: false,
+        show_occupation: true
+      }
     },
     created_at: '2024-01-01',
     updated_at: '2024-01-15',
@@ -93,11 +111,20 @@ const mockCauses: Cause[] = [
       email: 'medical@example.com',
       first_name: 'Dr. Sarah',
       last_name: 'Johnson',
+      location: 'Nairobi, Kenya',
+      phone: '+254123456789',
+      occupation: 'Doctor',
       is_verified: true,
       is_active: true,
       date_joined: '2024-01-01',
       last_login: '2024-01-15',
-      role: 'organizer'
+      role: 'organizer',
+      profile_visibility: {
+        show_full_name: true,
+        show_location: true,
+        show_phone: false,
+        show_occupation: true
+      }
     },
     created_at: '2024-01-01',
     updated_at: '2024-01-15',

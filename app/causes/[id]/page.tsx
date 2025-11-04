@@ -55,8 +55,7 @@ const mockCauses: Cause[] = [
     is_featured: true,
     donation_count: 42,
     progress_percentage: 65,
-    tags: ['education', 'children', 'school', 'ghana'],
-    updates: []
+    tags: ['education', 'children', 'school', 'ghana']
   },
   {
     id: '2',
@@ -97,8 +96,7 @@ const mockCauses: Cause[] = [
     is_featured: false,
     donation_count: 67,
     progress_percentage: 43,
-    tags: ['animals', 'shelter', 'rescue', 'pets'],
-    updates: []
+    tags: ['animals', 'shelter', 'rescue', 'pets']
   }
 ]
 
