@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import Button from '@/components/ui/Button'
-import Card, { CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
 
 export default function VerifyEmailHandlerPage() {
   const [verificationStatus, setVerificationStatus] = useState<'verifying' | 'success' | 'error'>('verifying')
