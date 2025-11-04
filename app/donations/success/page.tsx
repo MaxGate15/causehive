@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { formatCurrency } from '@/lib/utils'
@@ -28,7 +28,7 @@ interface DonationDetails {
   payment_method: string
 }
 
-export default function DonationSuccessPage() {
+function DonationSuccessPageContent() {
   const { user, logout } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -54,27 +54,36 @@ export default function DonationSuccessPage() {
           // Load cart data from localStorage backup
           const cartBackup = localStorage.getItem('payment_cart_backup')
           let causes = []
+          let totalAmount = 0
           
           if (cartBackup) {
             const cartItems = JSON.parse(cartBackup)
-            causes = cartItems.map((item: any) => ({
-              title: item.cause.title,
-              amount: item.amount,
-              category: item.cause.category
-            }))
+            causes = cartItems.map((item: any) => {
+              totalAmount += item.amount
+              return {
+                title: item.cause.title,
+                amount: item.amount,
+                category: item.cause.category
+              }
+            })
             // Clean up backup
             localStorage.removeItem('payment_cart_backup')
           }
 
+          // Use amount from verification or fallback to cart total
+          const amount = verificationResult.data.amount || totalAmount || 0
+          const currency = verificationResult.data.currency || 'USD'
+          const status = verificationResult.data.status || 'completed'
+
           const donationData: DonationDetails = {
             reference: verificationResult.data.reference,
-            amount: verificationResult.data.amount,
-            currency: verificationResult.data.currency,
-            status: verificationResult.data.status,
+            amount: amount,
+            currency: currency,
+            status: status,
             timestamp: verificationResult.data.transaction_date || new Date().toISOString(),
             causes: causes.length > 0 ? causes : [{
               title: 'Donation',
-              amount: verificationResult.data.amount,
+              amount: amount,
               category: 'other'
             }],
             donor_name: verificationResult.data.customer?.first_name && verificationResult.data.customer?.last_name 
@@ -381,5 +390,17 @@ export default function DonationSuccessPage() {
 
       <Footer />
     </div>
+  )
+}
+
+export default function DonationSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
+      </div>
+    }>
+      <DonationSuccessPageContent />
+    </Suspense>
   )
 }

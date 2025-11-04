@@ -80,6 +80,16 @@ export interface PaymentResponse {
     access_code?: string
     reference: string
     payment_url?: string
+    // Verification response fields
+    amount?: number
+    currency?: string
+    status?: string
+    transaction_date?: string
+    customer?: {
+      email: string
+      first_name?: string
+      last_name?: string
+    }
   }
 }
 
@@ -396,8 +406,7 @@ class PaymentService {
                 success: true,
                 message: 'Payment completed successfully',
                 data: {
-                  reference: response.reference,
-                  transaction: response.transaction
+                  reference: response.reference
                 }
               })
             }

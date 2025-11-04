@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
@@ -225,7 +225,7 @@ const mockCauses: Cause[] = [
   }
 ]
 
-export default function CausesPage() {
+function CausesPageContent() {
   const { user, logout } = useAuth()
   const { addItem, isInCart, itemCount } = useDonationCart()
   const searchParams = useSearchParams()
@@ -895,5 +895,17 @@ export default function CausesPage() {
 
       <Footer />
     </div>
+  )
+}
+
+export default function CausesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
+      </div>
+    }>
+      <CausesPageContent />
+    </Suspense>
   )
 }
